@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Image</th>
       <th>Description</th>
       <th>String</th>
       <th>User</th>
@@ -15,11 +16,12 @@
   <tbody>
     <% @pins.each do |pin| %>
       <tr>
+        <td><%= image_tag pin.image.url(:medium) %></td>
         <td><%= pin.description %></td>
         <td><%= pin.string %></td>
         <td><%= pin.user.email if pin.user %></td>
         <td><%= link_to 'Show', pin %></td>
-        <% if pin.user == curent_user %>
+        <% if pin.user == @curent_user %>
           <td><%= link_to 'Edit', edit_pin_path(pin) %></td>
           <td><%= link_to 'Destroy', pin, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
@@ -30,4 +32,5 @@
 
 <br>
 <% if user_signed_in? %>
-<%= link_to 'New Pin', new_pin_path %>
+  <%= link_to 'New Pin', new_pin_path %>
+<% end %>
